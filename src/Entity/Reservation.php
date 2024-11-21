@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Enum\ReservationEtat;
 use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,8 +29,28 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $jour_Dep = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $reservEtat = null;
+    #[ORM\Column(enumType: ReservationEtat::class)]
+    private ReservationEtat $reservEtat;
+
+    #[ORM\ManyToOne(inversedBy: 'reservation')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\Cascade(["persist"])]
+    private ?Client $client ;
+
+    /**
+     * @var Collection<int, Chambre>
+     */
+    #[ORM\ManyToMany(targetEntity: Chambre::class)]
+    private Collection $chambre;
+
+    #[ORM\ManyToOne(inversedBy: 'reservation')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Manager $manager = null;
+
+    public function __construct()
+    {
+        $this->chambre = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,14 +105,62 @@ class Reservation
         return $this;
     }
 
-    public function getReservEtat(): ?string
+    public function getReservEtat(): ?ReservationEtat
     {
         return $this->reservEtat;
     }
 
-    public function setReservEtat(string $reservEtat): static
+    public function setReservEtat(ReservationEtat $reservEtat): self
     {
         $this->reservEtat = $reservEtat;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Chambre>
+     */
+    public function getChambre(): Collection
+    {
+        return $this->chambre;
+    }
+
+    public function addChambre(Chambre $chambre): static
+    {
+        if (!$this->chambre->contains($chambre)) {
+            $this->chambre->add($chambre);
+        }
+
+        return $this;
+    }
+
+    public function removeChambre(Chambre $chambre): static
+    {
+        $this->chambre->removeElement($chambre);
+
+        return $this;
+    }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): static
+    {
+        $this->manager = $manager;
 
         return $this;
     }

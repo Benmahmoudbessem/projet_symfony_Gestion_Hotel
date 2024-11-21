@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\ChambreEtat;
 use App\Repository\ChambreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,8 +27,12 @@ class Chambre
     #[ORM\Column(length: 255)]
     private ?string $style = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $etat = null;
+    #[ORM\Column(type: 'string', enumType: ChambreEtat::class)]
+    private ChambreEtat $etat;
+
+    #[ORM\ManyToOne(inversedBy: 'chambre')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Hotel $hotel = null;
 
     public function getId(): ?int
     {
@@ -84,14 +89,26 @@ class Chambre
         return $this;
     }
 
-    public function getEtat(): ?string
+    public function getEtat(): ?ChambreEtat
     {
         return $this->etat;
     }
 
-    public function setEtat(string $etat): static
+    public function setEtat(ChambreEtat $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getHotel(): ?Hotel
+    {
+        return $this->hotel;
+    }
+
+    public function setHotel(?Hotel $hotel): self
+    {
+        $this->hotel = $hotel;
 
         return $this;
     }
