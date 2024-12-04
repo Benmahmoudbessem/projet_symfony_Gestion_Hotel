@@ -1,39 +1,120 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hotel index{% endblock %}
+{% block title %}Hotel list{% endblock %}
 
 {% block body %}
-    <h1>Hotel index</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>NbChambre</th>
-                <th>Address</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for hotel in hotels %}
-            <tr>
-                <td>{{ hotel.id }}</td>
-                <td>{{ hotel.nom }}</td>
-                <td>{{ hotel.nbChambre }}</td>
-                <td>{{ hotel.address }}</td>
-                <td>
-                    <a href="{{ path('app_hotel_show', {'id': hotel.id}) }}">show</a>
-                    <a href="{{ path('app_hotel_edit', {'id': hotel.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center text-primary mb-4" style="color: red;">Hotel List</h1>
 
-    <a href="{{ path('app_hotel_new') }}">Create new</a>
+        <!-- Table des hôtels -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 900px; margin: auto;">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>NbChambre</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for hotel in hotels %}
+                    <tr>
+                        <td>{{ hotel.id }}</td>
+                        <td>{{ hotel.nom }}</td>
+                        <td>{{ hotel.nbChambre }}</td>
+                        <td>{{ hotel.address }}</td>
+                        <td>
+                            <a href="{{ path('app_hotel_show', {'id': hotel.id}) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ path('app_hotel_edit', {'id': hotel.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bouton pour créer un nouvel hôtel -->
+        <div class="text-center mt-4">
+            <a href="{{ path('app_hotel_new') }}" class="btn btn-primary"
+               style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Create New Hotel
+            </a>
+        </div>
+    </div>
+
+    {# Ajout des styles CSS dans cette page #}
+    <style>
+        /* Centrer le titre en rouge */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2rem;
+        }
+
+        /* Structurer la table des hôtels */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
 {% endblock %}

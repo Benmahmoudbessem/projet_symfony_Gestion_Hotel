@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<!-- Conteneur du formulaire avec une bordure arrondie et de l'ombre pour un effet de carte -->
+<div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+
+    <!-- Titre du formulaire -->
+    <h2 class="text-center" style="color: red; font-size: 1.8rem; margin-bottom: 30px;">{{ button_label|default('Create') }} Chambre</h2>
+
+    <!-- Affichage des champs du formulaire -->
+    <div class="form-group">
+        {{ form_widget(form) }}
+    </div>
+
+    <!-- Bouton de soumission centré -->
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" style="padding: 12px 30px; font-size: 16px; border-radius: 5px; background-color: #007bff; color: white; border: none;">
+            {{ button_label|default('Save') }}
+        </button>
+    </div>
+</div>
+
 {{ form_end(form) }}

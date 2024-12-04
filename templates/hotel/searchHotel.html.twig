@@ -1,0 +1,25 @@
+<form method="post">
+
+    Nom: <input type="text"  name="hotelName">
+    <input type="submit">
+</form>
+{% if listeH is empty %}
+    la liste est vide
+{% else %}
+    <table>
+        <tr>
+            <td> id </td>
+            <td> nom </td>
+            <td> address </td>
+            <td> nb chambre </td>
+        </tr>
+        {%  for h in listeH %}
+            <tr>
+                <td> {{ h.id }}</td>
+                <td> {{ h.nom }}</td>
+                <td> {{ h.address }}</td>
+                <td> {{ h.nbChambre }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

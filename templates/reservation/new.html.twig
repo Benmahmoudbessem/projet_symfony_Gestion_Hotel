@@ -1,11 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Reservation{% endblock %}
+{% block title %}Create New Reservation{% endblock %}
 
 {% block body %}
-    <h1>Create new Reservation</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    {{ include('reservation/_form.html.twig') }}
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center" style="color: red; font-size: 2rem; margin-bottom: 30px;">Créer une Nouvelle Réservation</h1>
 
-    <a href="{{ path('app_reservation_index') }}">back to list</a>
+        <!-- Formulaire de création -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+            {{ include('reservation/_form.html.twig') }}
+        </div>
+
+        <!-- Bouton retour à la liste des réservations -->
+        <div class="text-center mt-4">
+            <a href="{{ path('app_reservation_index') }}" class="btn btn-primary" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Retour à la liste des réservations
+            </a>
+        </div>
+
+    </div>
+
+    {# Styles spécifiques à cette page #}
+    <style>
+        /* Style du formulaire */
+        .form-control {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        /* Style pour le bouton */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Ajustements pour le titre */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2rem;
+        }
+
+        /* Amélioration de l'apparence des formulaires et des champs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Style des labels */
+        label {
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+    </style>
+
 {% endblock %}

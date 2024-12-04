@@ -3,9 +3,93 @@
 {% block title %}New Chambre{% endblock %}
 
 {% block body %}
-    <h1>Create new Chambre</h1>
+    <!-- Fond général avec espacement et coins arrondis -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 40px; border-radius: 10px;">
 
-    {{ include('chambre/_form.html.twig') }}
+        <!-- Titre centré en rouge -->
+        <h1 class="text-center" style="color: red; font-size: 2.5rem; margin-bottom: 30px;">Créer une nouvelle Chambre</h1>
 
-    <a href="{{ path('app_chambre_index') }}">back to list</a>
+        <!-- Formulaire de création -->
+        <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 700px; margin: auto;">
+
+            <!-- Inclusion du formulaire -->
+            {{ include('chambre/_form.html.twig') }}
+
+            <!-- Bouton de soumission -->
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success" style="padding: 12px 25px; font-size: 16px; border-radius: 5px;">
+                    Créer la Chambre
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Retour à la liste des chambres -->
+        <div class="text-center mt-4">
+            <a href="{{ path('app_chambre_index') }}" class="btn btn-primary"
+               style="background-color: #007bff; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none;">
+                Retour à la liste
+            </a>
+        </div>
+
+    </div>
+
+    {# Ajout des styles CSS spécifiques à cette page #}
+    <style>
+        /* Style pour les titres */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Style pour les champs du formulaire */
+        .form-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control, .form-select {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Style pour les boutons */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    </style>
+
 {% endblock %}

@@ -78,4 +78,16 @@ final class PersonneController extends AbstractController
 
         return $this->redirectToRoute('app_personne_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/search', name: 'searchH')]
+    public function searchPersonne(Request $r, EntityManagerInterface $em)
+    {
+
+        $nom = $r->request->get('personneName');
+        $q= $em-> createQuery('select p FROM App\Entity\Personne p where p.nom= :nom');
+        $q-> setParameter('nom', $nom);
+        $personnes=$q->getResult();
+        return $this->render('personne/searchPersonne.html.twig',["listeP"=>$personnes,]);
+    }
+
 }

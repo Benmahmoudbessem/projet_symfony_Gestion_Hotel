@@ -23,7 +23,7 @@ class ChambreType extends AbstractType
             ->add('etat', ChoiceType::class, [
                 'choices' => ChambreEtat::cases(),
                 'choice_label' => fn(ChambreEtat $etat) => $etat->name,
-                'choice_value' => fn(?ChambreEtat $etat) => $etat?->value, // Stocke la valeur dans le formulaire
+                'choice_value' => fn(?ChambreEtat $etat) => $etat?->value,
             ])
 
         ->add('hotel', EntityType::class, [

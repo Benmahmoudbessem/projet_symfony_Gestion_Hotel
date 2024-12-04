@@ -78,4 +78,17 @@ final class HotelController extends AbstractController
 
         return $this->redirectToRoute('app_hotel_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/search', name: 'searchH')]
+    public function searchHotel(Request $r, EntityManagerInterface $em)
+    {
+
+        $nom = $r->request->get('hotelName');
+        $q= $em-> createQuery('select h FROM App\Entity\Hotel h  where h.nom= :nom');
+        $q-> setParameter('nom', $nom);
+        $hotels=$q->getResult();
+        return $this->render('hotel/searchHotel.html.twig',["listeH"=>$hotels,]);
+    }
+
+
 }

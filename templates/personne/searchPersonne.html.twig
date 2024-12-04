@@ -1,0 +1,25 @@
+<form method="post">
+
+    Nom: <input type="text"  name="personneName">
+    <input type="submit">
+</form>
+{% if listeP is empty %}
+    la liste est vide
+{% else %}
+    <table>
+        <tr>
+            <td> id </td>
+            <td> nom </td>
+            <td> prenom</td>
+
+        </tr>
+        {%  for p in listeP %}
+            <tr>
+                <td> {{ p.id }}</td>
+                <td> {{ p.nom }}</td>
+                <td> {{ p.prenom }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

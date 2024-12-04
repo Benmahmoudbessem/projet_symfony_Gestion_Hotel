@@ -3,36 +3,113 @@
 {% block title %}Client{% endblock %}
 
 {% block body %}
-    <h1>Client</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ client.name }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ client.address }}</td>
-            </tr>
-            <tr>
-                <th>ContactNumber</th>
-                <td>{{ client.contactNumber }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ client.email }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center" style="color: red; font-size: 2rem; margin-bottom: 30px;">Détails du Client</h1>
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+        <!-- Tableau des informations du client -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ client.id }}</td>
+                </tr>
+                <tr>
+                    <th>Adresse</th>
+                    <td>{{ client.address }}</td>
+                </tr>
+                <tr>
+                    <th>Numéro de Contact</th>
+                    <td>{{ client.contactNumber }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ client.email }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+        <!-- Boutons supplémentaires -->
+        <div class="text-center mt-4">
+            <!-- Bouton retour à la liste des clients -->
+            <a href="{{ path('app_client_index') }}" class="btn btn-primary"
+               style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Retour à la liste des clients
+            </a>
 
-    {{ include('client/_delete_form.html.twig') }}
+            <!-- Bouton pour modifier le client -->
+            <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-warning"
+               style="background-color: #ffc107; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-left: 10px;">
+                Modifier
+            </a>
+        </div>
+
+        <!-- Formulaire de suppression -->
+        <div class="text-center mt-4">
+            <div>
+                {{ include('client/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </div>
+
+    {# Styles spécifiques à cette page #}
+    <style>
+        /* Style du tableau */
+        table.table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        table.table th {
+            background-color: #f8f9fa;
+        }
+
+        table.table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        /* Styles des boutons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    </style>
+
 {% endblock %}

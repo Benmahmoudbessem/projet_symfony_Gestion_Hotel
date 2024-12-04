@@ -1,46 +1,139 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chambre index{% endblock %}
+{% block title %}Chambre list{% endblock %}
 
 {% block body %}
-    <h1>liste des chambres</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nb_lits</th>
-                <th>Prix</th>
-                <th>Etage</th>
-                <th>Style</th>
-                <th>Etat</th>
-                <th>hotel</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for chambre in chambres %}
-            <tr>
-                <td>{{ chambre.id }}</td>
-                <td>{{ chambre.nbLits }}</td>
-                <td>{{ chambre.prix }}</td>
-                <td>{{ chambre.etage }}</td>
-                <td>{{ chambre.style }}</td>
-                <td>{{ chambre.etat }}</td>
-                <td>{{ chambre.hotel }}</td>
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center text-primary mb-4" style="color: red;">Liste des Chambres</h1>
 
-                <td>
-                    <a href="{{ path('app_chambre_show', {'id': chambre.id}) }}">show</a>
-                    <a href="{{ path('app_chambre_edit', {'id': chambre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <!-- Table des chambres -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow-x: auto;">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nb_lits</th>
+                    <th>Prix</th>
+                    <th>Etage</th>
+                    <th>Style</th>
+                    <th>Etat</th>
+                    <th>Hotel</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for chambre in chambres %}
+                    <tr>
+                        <td>{{ chambre.id }}</td>
+                        <td>{{ chambre.nbLits }}</td>
+                        <td>{{ chambre.prix }}</td>
+                        <td>{{ chambre.etage }}</td>
+                        <td>{{ chambre.style }}</td>
+                        <td>{{ chambre.etat.value }}</td>
+                        <td>{{ chambre.hotel.nom }}</td>
 
-    <a href="{{ path('app_chambre_new') }}">Create new</a>
+                        <td>
+                            <a href="{{ path('app_chambre_show', {'id': chambre.id}) }}" class="btn btn-info"
+                               style="padding: 6px 12px; border-radius: 5px; text-decoration: none; color: white; background-color: #17a2b8;">
+                                Show
+                            </a>
+                            <a href="{{ path('app_chambre_edit', {'id': chambre.id}) }}" class="btn btn-warning"
+                               style="padding: 6px 12px; border-radius: 5px; text-decoration: none; color: white; background-color: #ffc107;">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center">Aucune chambre trouvée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bouton de création d'une nouvelle chambre -->
+        <div class="text-center mt-4">
+            <a href="{{ path('app_chambre_new') }}" class="btn btn-success"
+               style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Ajouter une nouvelle chambre
+            </a>
+        </div>
+
+    </div>
+
+    {# Ajout des styles CSS dans cette page #}
+    <style>
+        /* Centrer le titre en rouge */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2rem;
+        }
+
+        /* Style pour la table */
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table td {
+            background-color: #ffffff;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 8px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    </style>
 {% endblock %}

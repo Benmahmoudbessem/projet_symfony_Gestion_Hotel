@@ -3,11 +3,89 @@
 {% block title %}Edit Chambre{% endblock %}
 
 {% block body %}
-    <h1>Edit Chambre</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    {{ include('chambre/_form.html.twig', {'button_label': 'Update'}) }}
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center" style="color: red; font-size: 2rem; margin-bottom: 30px;">Modifier la Chambre</h1>
 
-    <a href="{{ path('app_chambre_index') }}">back to list</a>
+        <!-- Formulaire de modification -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+            {{ include('chambre/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
 
-    {{ include('chambre/_delete_form.html.twig') }}
+        <!-- Boutons supplémentaires -->
+        <div class="text-center mt-4">
+            <!-- Bouton retour à la liste des chambres -->
+            <a href="{{ path('app_chambre_index') }}" class="btn btn-primary"
+               style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Retour à la liste
+            </a>
+
+            <!-- Formulaire de suppression -->
+            <div class="mt-3">
+                {{ include('chambre/_delete_form.html.twig') }}
+            </div>
+        </div>
+
+    </div>
+
+    {# Ajout des styles CSS spécifiques à cette page #}
+    <style>
+        /* Centrer le titre en rouge */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2rem;
+        }
+
+        /* Style des labels */
+        label {
+            font-size: 1.2rem;    /* Augmente la taille de la police des labels */
+            font-weight: bold;    /* Met les labels en gras */
+            display: block;
+            margin-bottom: 10px;   /* Ajoute de l'espace sous les labels */
+            color: #333;          /* Utilisation d'une couleur sombre pour le texte */
+        }
+
+        /* Style des champs du formulaire */
+        .form-control {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            margin-bottom: 20px;   /* Espacement entre les champs */
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        /* Style pour le bouton */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Amélioration de l'apparence des formulaires et des champs */
+        .form-group {
+            margin-bottom: 30px;  /* Espacement entre les sections du formulaire */
+        }
+
+    </style>
+
 {% endblock %}

@@ -2,9 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Client;
 use App\Entity\Reservation;
 use App\Enum\ChambreEtat;
 use App\Enum\ReservationEtat;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,8 +30,9 @@ class ReservationType extends AbstractType
                 'choice_label' => fn(ReservationEtat $reservEtat) => $reservEtat->name,
                 'choice_value' => fn(?ReservationEtat $reservEtat) => $reservEtat?->value, // Stocke la valeur dans le formulaire
             ])
-            ->add('client', ClientType::class, [
-                'label' => 'Informations du client', // Optionnel : définir un label pour le formulaire client
+            ->add('client', EntityType::class, [
+                'class' => Client::class,
+                'choice_label' => 'id',
             ]);
         ;
     }

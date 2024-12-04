@@ -1,43 +1,121 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation index{% endblock %}
+{% block title %}Reservation List{% endblock %}
 
 {% block body %}
-    <h1>Reservation index</h1>
+    <!-- Fond général -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px; border-radius: 10px;">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Num_reservation</th>
-                <th>Jour_Arr</th>
-                <th>Nb_jours</th>
-                <th>Jour_Dep</th>
-                <th>ReservEtat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for reservation in reservations %}
-            <tr>
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.numReservation }}</td>
-                <td>{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.nbJours }}</td>
-                <td>{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.reservEtat }}</td>
-                <td>
-                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
-                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <!-- Titre centré et en rouge -->
+        <h1 class="text-center" style="color: red; font-size: 2rem; margin-bottom: 30px;">Liste des Réservations</h1>
 
-    <a href="{{ path('app_reservation_new') }}">Create new</a>
+        <!-- Table des réservations -->
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); overflow-x: auto;">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numéro de Réservation</th>
+                    <th>Arrivée</th>
+                    <th>Nb. Jours</th>
+                    <th>Départ</th>
+                    <th>Etat</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.id }}</td>
+                        <td>{{ reservation.numReservation }}</td>
+                        <td>{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.nbJours }}</td>
+                        <td>{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
+                        <td>{{ reservation.reservEtat }}</td>
+                        <td>
+                            <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-info" style="padding: 5px 10px; text-decoration: none; margin-right: 5px;">Show</a>
+                            <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-warning" style="padding: 5px 10px; text-decoration: none;">Edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">Aucune réservation trouvée</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bouton création -->
+        <div class="text-center mt-4">
+            <a href="{{ path('app_reservation_new') }}" class="btn btn-success" style="padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                Créer une nouvelle réservation
+            </a>
+        </div>
+
+    </div>
+
+    {# Styles spécifiques à cette page #}
+    <style>
+        /* Style du tableau */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        td {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Style des boutons */
+        .btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+    </style>
+
 {% endblock %}

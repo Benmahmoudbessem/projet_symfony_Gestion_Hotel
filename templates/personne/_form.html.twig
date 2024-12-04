@@ -1,4 +1,12 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto;">
+    <h2 class="text-center text-primary mb-4">Formulaire</h2>
+
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div class="mb-3">
+        {{ form_widget(form, {'attr': {'class': 'form-control mb-3'}}) }}
+    </div>
+    <div class="text-center">
+        <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+    {{ form_end(form) }}
+</div>

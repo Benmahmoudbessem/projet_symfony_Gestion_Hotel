@@ -3,9 +3,84 @@
 {% block title %}New Personne{% endblock %}
 
 {% block body %}
+    {# Ajout des styles CSS dans cette page #}
+    <style>
+        /* Centrer le titre en rouge */
+        h1 {
+            text-align: center;
+            color: red;
+            font-size: 2rem;
+        }
+
+        /* Style du formulaire */
+        .form-container {
+            max-width: 600px; /* Limite la largeur du formulaire */
+            margin: 0 auto; /* Centre le formulaire horizontalement */
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container .form-group {
+            margin-bottom: 1.5rem; /* Espacement entre les champs */
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .form-container button {
+            background-color: #007bff; /* Bleu */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 100%; /* Le bouton prend toute la largeur du formulaire */
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3; /* Bleu plus foncé au survol */
+        }
+
+        .back-to-list-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .back-to-list-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
     <h1>Create new Personne</h1>
 
-    {{ include('personne/_form.html.twig') }}
+    <div class="form-container">
+        {{ include('personne/_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('app_personne_index') }}">back to list</a>
+    <a href="{{ path('app_personne_index') }}">
+        <button class="back-to-list-btn">Back to list</button>
+    </a>
+
 {% endblock %}

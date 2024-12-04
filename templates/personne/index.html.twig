@@ -1,37 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Personne index{% endblock %}
+{% block title %}Liste des Personnes{% endblock %}
 
 {% block body %}
-    <h1>Personne index</h1>
+    <!-- Fond général de la page -->
+    <div style="background-color: #f0f8ff; min-height: 100vh; padding: 30px;">
+        <h1 class="text-center text-primary mb-4">Liste des Personnes</h1>
 
-    <table class="table">
-        <thead>
+        <!-- Style personnalisé -->
+        <style>
+            .table-custom {
+                width: 90%;
+                margin: auto;
+                background-color: #e6f7ff; /* Fond bleu clair */
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .table-custom th {
+                background-color: #007bff; /* Bleu vif pour l'en-tête */
+                color: white;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+
+            .table-custom td {
+                text-align: center;
+                padding: 15px;
+            }
+
+            .btn-pistache {
+                background-color: #98fb98;
+                color: #ffffff;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 5px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .btn-pistache:hover {
+                background-color: #82e682;
+            }
+        </style>
+
+        <!-- Tableau stylisé -->
+        <table class="table table-custom">
+            <thead>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>actions</th>
+                <th>Prénom</th>
+                <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for personne in personnes %}
-            <tr>
-                <td>{{ personne.id }}</td>
-                <td>{{ personne.nom }}</td>
-                <td>{{ personne.prenom }}</td>
-                <td>
-                    <a href="{{ path('app_personne_show', {'id': personne.id}) }}">show</a>
-                    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for personne in personnes %}
+                <tr>
+                    <td>{{ personne.id }}</td>
+                    <td>{{ personne.nom }}</td>
+                    <td>{{ personne.prenom }}</td>
+                    <td>
+                        <!-- Boutons pour les actions -->
+                        <form method="get" action="{{ path('app_personne_show', {'id': personne.id}) }}" style="display: inline;">
+                            <button type="submit" class="btn-pistache">👁 Voir</button>
+                        </form>
+                        <form method="get" action="{{ path('app_personne_edit', {'id': personne.id}) }}" style="display: inline;">
+                            <button type="submit" class="btn-pistache">✏ Modifier</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center text-danger">Aucun résultat trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('app_personne_new') }}">Create new</a>
+        <!-- Bouton de création centré -->
+        <div class="text-center mt-4">
+            <form method="get" action="{{ path('app_personne_new') }}">
+                <button type="submit" class="btn-pistache btn-lg shadow">+ Créer une nouvelle personne</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

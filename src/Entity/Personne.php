@@ -6,6 +6,14 @@ use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
+#[ORM\InheritanceType("JOINED")]
+#[ORM\DiscriminatorColumn(name: "type", type: "string")]
+#[ORM\DiscriminatorMap(["personne" => Personne::class,
+    "client" => Client::class,
+    "manager" => Manager::class
+])]
+
+
 class Personne
 {
     #[ORM\Id]
@@ -24,19 +32,14 @@ class Personne
         return $this->id;
     }
 
-    public function setId(string $id): static
-    {
-        $this->id = $id;
 
-        return $this;
-    }
 
     public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -48,7 +51,7 @@ class Personne
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 

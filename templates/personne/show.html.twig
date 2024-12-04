@@ -3,28 +3,80 @@
 {% block title %}Personne{% endblock %}
 
 {% block body %}
+    <style>
+        body {
+            background-color: #f4f4f9; /* Couleur de fond douce */
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #4CAF50; /* Couleur verte pour le titre */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .table {
+            width: 60%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .actions a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF; /* Couleur bleue pour les boutons */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .actions a:hover {
+            background-color: #0056b3; /* Teinte plus foncée au survol */
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
     <h1>Personne</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ personne.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ personne.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ personne.prenom }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ personne.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ personne.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td>{{ personne.prenom }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_personne_index') }}">back to list</a>
+    <div class="actions">
+        <a href="{{ path('app_personne_index') }}">Retour à la liste</a>
+        <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">Modifier</a>
+    </div>
 
-    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}">edit</a>
-
-    {{ include('personne/_delete_form.html.twig') }}
+    <div class="actions">
+        {{ include('personne/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

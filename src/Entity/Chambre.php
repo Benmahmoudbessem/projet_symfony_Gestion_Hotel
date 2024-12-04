@@ -28,7 +28,7 @@ class Chambre
     private ?string $style = null;
 
     #[ORM\Column(type: 'string', enumType: ChambreEtat::class)]
-    private ChambreEtat $etat;
+    private ?ChambreEtat $etat = null;
 
     #[ORM\ManyToOne(inversedBy: 'chambre')]
     #[ORM\JoinColumn(nullable: false)]
@@ -91,7 +91,7 @@ class Chambre
 
     public function getEtat(): ?ChambreEtat
     {
-        return $this->etat;
+        return  $this->etat;
     }
 
     public function setEtat(ChambreEtat $etat): self

@@ -16,6 +16,9 @@ class ManagerRepository extends ServiceEntityRepository
         parent::__construct($registry, Manager::class);
     }
 
+
+
+
     //    /**
     //     * @return Manager[] Returns an array of Manager objects
     //     */
