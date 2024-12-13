@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Réservez votre séjour - Hôtel de Luxe{% endblock %}</title>
+    <link rel="icon" href="{{ asset('images/foto.jpeg') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    {% block stylesheets %}
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Poppins', sans-serif;
+                background: #f7f7f7;
+                color: #333;
+                line-height: 1.6;
+            }
+
+            header {
+                background: url('{{ asset('images/fontt.jpg') }}') no-repeat center center/cover;
+                color: white;
+                padding: 50px 0;
+                text-align: center;
+            }
+
+            header h1 {
+                font-size: 2.8em;
+                margin: 0;
+            }
+
+            nav {
+                background: #003580;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 15px 0;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: 20px;
+            }
+
+            nav li {
+                display: inline-block;
+            }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-size: 1.2em;
+                padding: 10px 20px;
+                border-radius: 5px;
+                transition: background 0.3s, color 0.3s;
+            }
+
+            nav a:hover {
+                background: #FFD700;
+                color: #003580;
+            }
+
+            main {
+                margin: 20px auto;
+                max-width: 1200px;
+                padding: 20px;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .slideshow-container {
+                position: relative;
+                max-width: 100%;
+                margin: auto;
+                overflow: hidden;
+                height: 400px;
+            }
+
+            .slide {
+                display: none;
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                position: absolute;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            .active {
+                display: block;
+                opacity: 1;
+            }
+
+            .carousel-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                font-size: 1.5em;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .prev {
+                left: 10px;
+            }
+
+            .next {
+                right: 10px;
+            }
+
+            .hotels-section {
+                margin: 40px auto;
+                padding: 20px;
+                max-width: 1200px;
+            }
+
+            .hotels-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            .hotel-card {
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                text-align: center;
+                transition: transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+            }
+
+            .hotel-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                opacity: 0.9;
+            }
+
+            .hotel-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .hotel-card h3 {
+                font-size: 1.5em;
+                margin: 15px 0;
+                color: #003580;
+            }
+
+            .hotel-card p {
+                font-size: 1.2em;
+                margin: 10px 0;
+                color: #555;
+            }
+
+            .reasons-section {
+                margin: 50px auto;
+                padding: 20px;
+                background: #f0f8ff;
+                border-radius: 10px;
+                text-align: center;
+                max-width: 1200px;
+            }
+
+            .reasons-section h2 {
+                font-size: 2em;
+                color: #003580;
+                margin-bottom: 20px;
+            }
+
+            .reasons-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                text-align: left;
+            }
+
+            .reason {
+                background: white;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s;
+            }
+
+            .reason:hover {
+                transform: scale(1.03);
+            }
+
+            .reason h3 {
+                font-size: 1.5em;
+                color: #003580;
+                margin-bottom: 10px;
+            }
+
+            .reason p {
+                color: #555;
+                line-height: 1.5;
+            }
+
+            #contact {
+                margin: 40px auto;
+                padding: 30px;
+                background: #003580;
+                color: white;
+                text-align: center;
+                border-radius: 10px;
+            }
+
+            #contact h2 {
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                color: #FFD700;
+            }
+
+            footer {
+                background: #1a1a1a;
+                color: white;
+                padding: 20px 0;
+                font-size: 0.9em;
+            }
+
+            .footer-icons {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                border-bottom: 1px solid #444;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+
+            .footer-icons div {
+                text-align: center;
+            }
+
+            .footer-icons i {
+                font-size: 1.5em;
+                margin-bottom: 5px;
+                color: #FFD700;
+            }
+
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+
+            .footer-links a {
+                color: white;
+                text-decoration: none;
+            }
+
+            .footer-links a:hover {
+                text-decoration: underline;
+            }
+
+            .social-icons {
+                display: flex;
+                justify-content: center; /* Centrer horizontalement */
+                align-items: center; /* Centrer verticalement */
+                padding: 0; /* Retirer les marges internes si nécessaire */
+            }
+
+            .social-icons a {
+                color: red; /* Couleur par défaut */
+                margin: 0 10px;
+                font-size: 2.5em; /* Augmenter la taille des icônes */
+                transition: color 0.3s ease, transform 0.3s ease; /* Ajouter un effet de transition */
+            }
+
+            .social-icons a:hover {
+                color: #FFD700; /* Couleur au survol (jaune doré) */
+                transform: scale(1.2); /* Agrandir légèrement au survol */
+            }
+
+        </style>
+    {% endblock %}
+</head>
+<body>
+<header>
+    {% block header %}
+        <h1>Réservez votre séjour avec style</h1>
+    {% endblock %}
+</header>
+
+<nav>
+    {% block navigation %}
+        <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="{{ path('app_reservation_index') }}">Réservation</a></li>
+            <li><a href="{{ path('app_chambre_index') }}">Chambres</a></li>
+            <li><a href="{{ path('app_hotel_index') }}">Hôtels</a></li>
+            <li><a href="#contact">Contact</a></li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('app_logout') }}" style="color: red;">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}" style="color:yellow;">Connexion</a></li>
+                <li><a href="{{ path('app_register') }}" style="color: red;">Inscription</a></li>
+            {% endif %}
+        </ul>
+    {% endblock %}
+</nav>
+
+<main>
+    {% block body %}
+        <h2>Découvrez nos offres exceptionnelles</h2>
+        <div class="slideshow-container">
+            <img src="{{ asset('images/ch1.png') }}" class="slide active">
+            <img src="{{ asset('images/ch2.jpg') }}" class="slide">
+            <img src="{{ asset('images/ch3.jpg') }}" class="slide">
+            <img src="{{ asset('images/h1.jpg') }}" class="slide">
+            <img src="{{ asset('images/h2.jpg') }}" class="slide">
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
+        </div>
+
+        <section class="hotels-section">
+            <h2>Nos Hôtels et leurs Tarifs</h2>
+            <div class="hotels-grid">
+                <div class="hotel-card">
+                    <img src="{{ asset('images/h1.jpg') }}" alt="Hôtel 1">
+                    <h3>Hôtel Le Luxe</h3>
+                    <p>Prix : 200DT / nuit</p>
+                </div>
+                <div class="hotel-card">
+                    <img src="{{ asset('images/h2.jpg') }}" alt="Hôtel 2">
+                    <h3>Hôtel Côté Mer</h3>
+                    <p>Prix : 150DT / nuit</p>
+                </div>
+                <div class="hotel-card">
+                    <img src="{{ asset('images/h3.jpg') }}" alt="Hôtel 3">
+                    <h3>Hôtel Montagne</h3>
+                    <p>Prix : 180DT / nuit</p>
+                </div>
+                <div class="hotel-card">
+                    <img src="{{ asset('images/ch1.png') }}" alt="Hôtel 4">
+                    <h3>Hôtel Urbain</h3>
+                    <p>Prix : 120DT / nuit</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reasons-section">
+            <h2>Pourquoi choisir notre hôtel ?</h2>
+            <div class="reasons-list">
+                <div class="reason">
+                    <h3>Emplacement idéal</h3>
+                    <p>Situé au cœur des destinations les plus prisées, notre hôtel est à proximité des attractions majeures.</p>
+                </div>
+                <div class="reason">
+                    <h3>Services de qualité</h3>
+                    <p>Profitez de services exceptionnels, allant du spa luxueux à des expériences gastronomiques uniques.</p>
+                </div>
+                <div class="reason">
+                    <h3>Confort inégalé</h3>
+                    <p>Nos chambres sont équipées des meilleures installations pour garantir un séjour relaxant.</p>
+                </div>
+                <div class="reason">
+                    <h3>Tarifs compétitifs</h3>
+                    <p>Bénéficiez d’un excellent rapport qualité-prix avec nos offres spéciales et réductions exclusives.</p>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+</main>
+
+<section id="contact">
+    <h2>Contactez-nous</h2>
+    <p>Email : contact@hotel.com</p>
+    <p>Téléphone : +216 536 989</p>
+</section>
+
+<footer>
+    <div class="footer-icons">
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>Besoin d'aide? <br> 71 124 124</p>
+        </div>
+        <div>
+            <i class="fa fa-wallet"></i>
+            <p>Meilleur Prix <br> GARANTI</p>
+        </div>
+        <div>
+            <i class="fa fa-store"></i>
+            <p>34 Agences en <br> Tunisie</p>
+        </div>
+        <div>
+            <i class="fa fa-lock"></i>
+            <p>Paiement 100% <br> sécurisé</p>
+        </div>
+        <div>
+            <i class="fa fa-smile"></i>
+            <p>+200000 Clients <br> Satisfaits</p>
+        </div>
+    </div>
+    <div class="footer-links">
+        <a href="#">Plan du site</a>
+        <a href="#">Mention Légale</a>
+        <a href="#">Devenir Franchisé</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+</footer>
+
+{% block javascripts %}
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            // Cacher toutes les images
+            slides.forEach(slide => slide.style.display = 'none');
+
+            // Afficher l'image actuelle
+            slides[index].style.display = 'block';
+            slides[index].style.opacity = 1;
+        }
+
+        // Initialisation de l'affichage du premier slide
+        showSlide(currentIndex);
+
+        // Fonction pour changer les slides automatiquement
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        // Changer l'image toutes les 3 secondes
+        setInterval(nextSlide, 1000);
+
+    </script>
+{% endblock %}
+</body>
+</html>

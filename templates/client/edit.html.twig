@@ -10,8 +10,32 @@
         <h1 class="text-center" style="color: red; font-size: 2rem; margin-bottom: 30px;">Modifier le Client</h1>
 
         <!-- Formulaire de modification -->
-        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
-            {{ include('client/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); max-width: 600px; margin: auto;">
+            <form method="post">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="client_name" style="font-weight: bold; font-size: 1.1rem;">Nom du client</label>
+                    <input type="text" id="client_name" name="client[name]" class="form-control" placeholder="Entrez le nom du client" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="client_address" style="font-weight: bold; font-size: 1.1rem;">Adresse</label>
+                    <input type="text" id="client_address" name="client[address]" class="form-control" placeholder="Entrez l'adresse du client" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="client_contact" style="font-weight: bold; font-size: 1.1rem;">Numéro de contact</label>
+                    <input type="text" id="client_contact" name="client[contactNumber]" class="form-control" placeholder="Entrez le numéro de contact" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="client_email" style="font-weight: bold; font-size: 1.1rem;">Email</label>
+                    <input type="email" id="client_email" name="client[email]" class="form-control" placeholder="Entrez l'email du client" required>
+                </div>
+
+                <div class="form-group text-center" style="margin-top: 30px;">
+                    <button type="submit" class="btn btn-success" style="padding: 10px 20px; font-size: 1.1rem;">Mettre à jour</button>
+                </div>
+            </form>
         </div>
 
         <!-- Boutons supplémentaires -->
@@ -22,8 +46,8 @@
                 Retour à la liste des clients
             </a>
 
-            <!-- Formulaire de suppression -->
-            <div class="mt-3">
+            <!-- Formulaire de suppression avec espacement -->
+            <div class="mt-3" style="margin-top: 20px;">
                 {{ include('client/_delete_form.html.twig') }}
             </div>
         </div>
@@ -41,33 +65,21 @@
         }
 
         /* Style du formulaire */
-        .form-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: auto;
+        .form-group {
+            margin-bottom: 20px; /* Ajoute un espacement entre les champs */
         }
 
-        /* Style des labels */
         label {
-            font-size: 1.1rem;  /* Augmenter la taille de la police des labels */
             font-weight: bold;
-            display: block;
-            margin-bottom: 8px; /* Ajouter de l'espace sous les labels */
-            color: #333; /* Une couleur sombre pour améliorer la lisibilité */
+            font-size: 1.1rem;
         }
 
-        /* Style des champs du formulaire */
-        input, select, textarea {
+        .form-control {
             width: 100%;
             padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
+            margin-top: 5px;
             border-radius: 5px;
-            font-size: 1rem;
-            box-sizing: border-box;
+            border: 1px solid #ccc;
         }
 
         /* Style pour les boutons */
@@ -88,13 +100,13 @@
             background-color: #0056b3;
         }
 
-        .btn-warning {
-            background-color: #ffc107;
+        .btn-success {
+            background-color: #28a745;
             color: white;
         }
 
-        .btn-warning:hover {
-            background-color: #e0a800;
+        .btn-success:hover {
+            background-color: #218838;
         }
 
         .btn-danger {
@@ -106,6 +118,10 @@
             background-color: #c82333;
         }
 
+        /* Espacement entre les boutons */
+        .mt-3 {
+            margin-top: 20px; /* Ajoute de l'espace supplémentaire */
+        }
     </style>
 
 {% endblock %}
