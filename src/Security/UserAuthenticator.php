@@ -49,14 +49,23 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         $user = $token->getUser();
+
+        // Vérification pour le rôle "ROLE_CLIENT"
         if (in_array("ROLE_CLIENT", $user->getRoles(), true)) {
-            return new RedirectResponse($this->urlGenerator->generate('app_hotel_index'));
+            return new RedirectResponse($this->urlGenerator->generate('app_reservation_new'));
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_client_index'));
+        // Vérification pour le rôle "ROLE_MANAGER"
+        if (in_array("ROLE_MANAGER", $user->getRoles(), true)) {
+            // Choix entre app_chambre_index et app_hotel_index, selon votre logique (ici c'est aléatoire)
+            $randomRoute = rand(0, 1) ? 'app_chambre_index' : 'app_hotel_index';
+            return new RedirectResponse($this->urlGenerator->generate($randomRoute));
+        }
 
-
+        // Par défaut, rediriger vers app_hotel_index
+        return new RedirectResponse($this->urlGenerator->generate('app_hotel_index'));
     }
+
 
     protected function getLoginUrl(Request $request): string
     {

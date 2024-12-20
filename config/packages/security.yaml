@@ -41,8 +41,22 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+
+
+         - { path: ^/hotel/\d+/edit, roles: ROLE_MANAGER }
+         - { path: ^/hotel/\d+/delete, roles: ROLE_MANAGER }
+         - { path: ^/hotel/new, roles: ROLE_MANAGER }
+         - { path: ^/chambre/\d+/edit, roles: ROLE_MANAGER }
+         - { path: ^/chambre/\d+/delete, roles: ROLE_MANAGER }
+         - { path: ^/chambre/new, roles: ROLE_MANAGER }
+         - { path: ^/reservation/\d+/edit, roles: ROLE_MANAGER }
+         - { path: ^/reservation/\d+/delete, roles: ROLE_MANAGER }
+
+
+
+
+
+
 
 when@test:
     security:

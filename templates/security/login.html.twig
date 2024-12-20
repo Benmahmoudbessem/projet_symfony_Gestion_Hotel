@@ -4,6 +4,11 @@
 
 {% block body %}
     <div class="form-container">
+        <!-- Image ajoutée ici -->
+        <div class="text-center mb-4">
+            <img src="{{ asset('images/bb.jpg') }}" alt="Logo" class="img-fluid" style="max-width: 250px;">
+        </div>
+
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -93,6 +98,5 @@
         .alert {
             margin-bottom: 20px;
         }
-
     </style>
 {% endblock %}

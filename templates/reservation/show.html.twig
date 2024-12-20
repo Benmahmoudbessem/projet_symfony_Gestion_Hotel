@@ -3,40 +3,48 @@
 {% block title %}Reservation{% endblock %}
 
 {% block body %}
-    <h1>Reservation</h1>
+    <h1 style="text-align: center; margin-bottom: 20px; color: #2c3e50;">Détails de la Réservation</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ reservation.id }}</td>
+    <div style="width: 60%; margin: 0 auto; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+        <table class="table" style="width: 100%; border-collapse: collapse;">
+            <tbody>
+            <tr style="background-color: #f8f9fa;">
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">ID</th>
+                <td style="padding: 10px;">{{ reservation.id }}</td>
             </tr>
             <tr>
-                <th>Num_reservation</th>
-                <td>{{ reservation.numReservation }}</td>
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">Numéro de Réservation</th>
+                <td style="padding: 10px;">{{ reservation.numReservation }}</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">Jour d'Arrivée</th>
+                <td style="padding: 10px;">{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Jour_Arr</th>
-                <td>{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">Nombre de Jours</th>
+                <td style="padding: 10px;">{{ reservation.nbJours }}</td>
+            </tr>
+            <tr style="background-color: #f8f9fa;">
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">Jour de Départ</th>
+                <td style="padding: 10px;">{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Nb_jours</th>
-                <td>{{ reservation.nbJours }}</td>
+                <th style="text-align: left; padding: 10px; color: #2c3e50;">État de la Réservation</th>
+                <td style="padding: 10px;">{{ reservation.reservEtat.value }}</td>
             </tr>
-            <tr>
-                <th>Jour_Dep</th>
-                <td>{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ReservEtat</th>
-                <td>{{ reservation.reservEtat }}</td>
-            </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('app_reservation_index') }}">back to list</a>
-
-    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
-
-    {{ include('reservation/_delete_form.html.twig') }}
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ path('app_reservation_index') }}"
+           style="padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">
+            Retour à la liste
+        </a>
+        <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}"
+           style="padding: 10px 20px; background-color: #f1c40f; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">
+            Modifier
+        </a>
+        {{ include('reservation/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

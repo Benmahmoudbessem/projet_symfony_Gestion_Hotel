@@ -43,9 +43,7 @@ class Reservation
     #[ORM\ManyToMany(targetEntity: Chambre::class)]
     private Collection $chambre;
 
-    #[ORM\ManyToOne(inversedBy: 'reservation')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Manager $manager = null;
+
 
     public function __construct()
     {
@@ -153,15 +151,6 @@ class Reservation
         return $this;
     }
 
-    public function getManager(): ?Manager
-    {
-        return $this->manager;
-    }
 
-    public function setManager(?Manager $manager): static
-    {
-        $this->manager = $manager;
 
-        return $this;
-    }
 }

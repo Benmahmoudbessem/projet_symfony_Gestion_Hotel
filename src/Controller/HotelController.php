@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+
 #[Route('/hotel')]
 final class HotelController extends AbstractController
 {
@@ -64,11 +65,11 @@ final class HotelController extends AbstractController
 
         return $this->render('hotel/edit.html.twig', [
             'hotel' => $hotel,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_hotel_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_hotel_delete', methods: ['POST'])]
     public function delete(Request $request, Hotel $hotel, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$hotel->getId(), $request->getPayload()->getString('_token'))) {
@@ -79,16 +80,29 @@ final class HotelController extends AbstractController
         return $this->redirectToRoute('app_hotel_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/search', name: 'searchH')]
-    public function searchHotel(Request $r, EntityManagerInterface $em)
-    {
 
-        $nom = $r->request->get('hotelName');
-        $q= $em-> createQuery('select h FROM App\Entity\Hotel h where h.nom= :nom');
-        $q-> setParameter('nom', $nom);
-        $hotels=$q->getResult();
-        return $this->render('hotel/searchHotel.html.twig',["listeH"=>$hotels,]);
+    #[Route('/search', name: 'app-searchH', methods: ['GET', 'POST'])]
+    public function searchHotel(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer le nom de l'hôtel depuis la requête
+        $nom = $request->query->get('hotelName'); // Utiliser 'query' si méthode GET, sinon 'request' pour POST
+
+        // Construire la requête DQL
+        $query = $entityManager->createQuery('
+        SELECT h
+        FROM App\Entity\Hotel h
+        WHERE h.nom = :nom
+    ')->setParameter('nom', $nom);
+
+        // Récupérer les résultats
+        $hotels = $query->getResult(); // Renvoie des entités
+
+        // Renvoyer les résultats au template Twig
+        return $this->render('hotel/searchHotel.html.twig', [
+            'listeH' => $hotels,
+        ]);
     }
+
 
 
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'hôtel{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ hotel.name }}</h1>
+        <p><strong>address:</strong> {{ hotel.address }}</p>
+        <p><strong>nbChambre:</strong> {{ hotel.nbChambre }}</p>
+
+
+    </div>
+{% endblock %}

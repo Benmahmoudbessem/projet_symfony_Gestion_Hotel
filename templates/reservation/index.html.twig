@@ -31,7 +31,7 @@
                         <td>{{ reservation.jourArr ? reservation.jourArr|date('Y-m-d') : '' }}</td>
                         <td>{{ reservation.nbJours }}</td>
                         <td>{{ reservation.jourDep ? reservation.jourDep|date('Y-m-d') : '' }}</td>
-                        <td>{{ reservation.reservEtat }}</td>
+                        <td>{{ reservation.reservEtat.value }}</td>
                         <td>
                             <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="btn btn-info" style="padding: 5px 10px; text-decoration: none; margin-right: 5px;">Show</a>
                             <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="btn btn-warning" style="padding: 5px 10px; text-decoration: none;">Edit</a>
